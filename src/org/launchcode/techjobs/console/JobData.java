@@ -77,7 +77,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (containsIgnoreCase(aValue, value)) {
                 jobs.add(row);
             }
         }
@@ -93,7 +93,7 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
             for (String v : row.values()) {
-                if (v.contains(value)) {
+                if (containsIgnoreCase(v, value)) {
                     if (!jobs.contains(row)) {
                         jobs.add(row);
                     }
@@ -101,6 +101,16 @@ public class JobData {
             }
         }
         return jobs;
+    }
+
+    /**
+     * Checks that a value exists in a string
+     * @param text the text that may contain the value
+     * @param value the value that may be present in the text
+     * @return true if text contains the value. Otherwise returns false
+     */
+    private static boolean containsIgnoreCase (String text, String value) {
+        return text.toLowerCase().contains(value.toLowerCase());
     }
 
     /**
